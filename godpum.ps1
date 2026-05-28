@@ -1,15 +1,17 @@
-# 1. หา Path ปัจจุบันที่สคริปต์ (godpum.ps1) นี้ตั้งอยู่
-$scriptDir = $PSScriptRoot
+# ===== CONFIG =====
+$exeUrl = "https://raw.githubusercontent.com/USERNAME/REPO/main/main2.exe"
 
-# 2. กำหนด Path ของไฟล์ exe ที่ต้องการรัน (ต้องอยู่ในโฟลเดอร์เดียวกัน)
-$exePath = Join-Path -Path $scriptDir -ChildPath "main2.exe"
+# ===== TEMP PATH =====
+$tempExe = Join-Path $env:TEMP "main2.exe"
 
-# 3. ตรวจสอบว่ามีไฟล์อยู่จริงหรือไม่ แล้วสั่งรัน
-if (Test-Path -Path $exePath) {
-    Write-Host "กำลังรันไฟล์: $exePath" -ForegroundColor Green
-    # สั่งรันโปรแกรม
-    Start-Process -FilePath $exePath
-} else {
-    Write-Host "หาไฟล์ main2.exe ไม่พบในโฟลเดอร์นี้ ($scriptDir)" -ForegroundColor Red
-    Pause
-}
+# ===== DOWNLOAD =====
+Invoke-WebRequest -Uri $exeUrl -OutFile $tempExe
+
+# ===== RUN =====
+Start-Process $tempExe
+
+# ===== WAIT =====
+Start-Sleep -Seconds 3
+
+# ===== DELETE TEMP FILE =====
+Remove-Item $tempExe -Force
